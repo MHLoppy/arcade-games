@@ -27,7 +27,7 @@ struct wall
 static wall *selected_wall = nullptr;
 static bool start_anchor_selected = false;
 static bool end_anchor_selected = false;
-static color selected_anchor_color = COLOR_BLACK;
+static color selected_anchor_color = COLOR_GREEN;
 
 // Inline function to check if two balls overlap.
 inline bool balls_overlap(const circle &c1, const circle &c2)
@@ -175,7 +175,8 @@ ball add_ball(int ball_id, const vector<ball> &existing_balls, const vector<wall
     new_ball.ball_circle.radius = 15;                    // Set radius to a fixed value
     new_ball.mass = new_ball.ball_circle.radius * 10.0f; // Calculate mass proportional to radius
 
-    new_ball.fill_color = random_rgb_color(255);
+    //new_ball.fill_color = random_rgb_color(255);
+    new_ball.fill_color = COLOR_RED;
 
     // Find a position for the new ball that doesn't overlap with any existing balls or walls
     while (!position_found)
@@ -291,18 +292,18 @@ void resolve_and_draw_collisions(vector<ball> &balls, const vector<wall> &walls)
 void draw_wall(const wall &w)
 {
     // Determine the colors for the anchors
-    color start_anchor_color = COLOR_BLUE;
-    color end_anchor_color = COLOR_BLUE;
+    color start_anchor_color = COLOR_GREEN;
+    color end_anchor_color = COLOR_GREEN;
 
     if (&w == selected_wall)
     {
         if (start_anchor_selected)
         {
-            start_anchor_color = COLOR_CYAN; // Selected anchor turns blue
+            start_anchor_color = COLOR_LIGHT_GREEN; // Selected anchor turns blue
         }
         if (end_anchor_selected)
         {
-            end_anchor_color = COLOR_CYAN; // Selected anchor turns blue
+            end_anchor_color = COLOR_LIGHT_GREEN; // Selected anchor turns blue
         }
     }
 
@@ -364,7 +365,7 @@ void handle_inputs(vector<ball> &balls, vector<wall> &walls)
                     selected_wall = &w;
                     start_anchor_selected = true;
                     end_anchor_selected = false;
-                    selected_anchor_color = COLOR_BLACK; // Selected anchor turns blue
+                    selected_anchor_color = COLOR_LIGHT_GREEN; // Selected anchor turns blue
                     return;
                 }
                 // Check if the click is on the end anchor
@@ -373,7 +374,7 @@ void handle_inputs(vector<ball> &balls, vector<wall> &walls)
                     selected_wall = &w;
                     end_anchor_selected = true;
                     start_anchor_selected = false;
-                    selected_anchor_color = COLOR_BLACK; // Selected anchor turns blue
+                    selected_anchor_color = COLOR_LIGHT_GREEN; // Selected anchor turns blue
                     return;
                 }
             }
@@ -385,7 +386,7 @@ void handle_inputs(vector<ball> &balls, vector<wall> &walls)
             start_anchor_selected = false;
             end_anchor_selected = false;
             selected_wall = nullptr;
-            selected_anchor_color = COLOR_BLACK;
+            selected_anchor_color = COLOR_GREEN;
         }
     }
 
@@ -465,6 +466,21 @@ void update_balls(vector<ball> &balls)
         {
             b.ball_circle.center.x = screen_width() - b.ball_circle.radius; // Reposition ball inside the right boundary
             b.velocity.x *= -1;                                             // Reverse the x-velocity (bounce off the wall)
+        }
+
+        if (abs(b.velocity.x) + abs(b.velocity.y) > 1.25)
+        {
+            if (b.fill_color.r < 0.99)
+                b.fill_color.r += 0.01f;
+            if (b.fill_color.b > 0.01)
+                b.fill_color.b -= 0.01f;
+        }
+        else if (abs(b.velocity.x) + abs(b.velocity.y) < 0.25)
+        {
+            if (b.fill_color.b < 0.99)
+                b.fill_color.b += 0.01f;
+            if (b.fill_color.r > 0.01)
+                b.fill_color.r -= 0.01f;
         }
     }
 }
