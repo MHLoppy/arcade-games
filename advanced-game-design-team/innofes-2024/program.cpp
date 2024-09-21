@@ -280,15 +280,15 @@ void draw_line_on_grid(Grid& grid, int x1, int y1, int x2, int y2) {
 }
 
 void setup_walls(Grid& grid) {
-    // // Create a few potentially-long random walls
-    // for (int i = 0; i < 3; ++i)
-    // {
-    //     int x1 = rnd(grid.width);
-    //     int y1 = rnd(grid.height);
-    //     int x2 = rnd(grid.width);
-    //     int y2 = rnd(grid.height);
-    //     draw_line_on_grid(grid, x1, y1, x2, y2);
-    // }
+    // Create a few potentially-long random walls
+    for (int i = 0; i < 3; ++i)
+    {
+        int x1 = rnd(grid.width);
+        int y1 = rnd(grid.height);
+        int x2 = rnd(grid.width);
+        int y2 = rnd(grid.height);
+        draw_line_on_grid(grid, x1, y1, x2, y2);
+    }
     // Create some extra, shorter walls with more controlled distribution
     //   for reasons I haven't figured out, the "center" is north-west of the window's center
     float mid = 0.5;
