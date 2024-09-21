@@ -489,7 +489,7 @@ int main()
 {
     const string WINDOW_NAME = "Tech demo: ball physics 2";
 
-    open_window(WINDOW_NAME, 1400, 800);
+    open_window(WINDOW_NAME, 960, 530);
 
     int num_balls = 40;
     int num_walls = 4;

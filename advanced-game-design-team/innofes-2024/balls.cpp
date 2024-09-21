@@ -39,7 +39,7 @@ ball add_ball(int ball_id, const vector<ball> &existing_balls)
     new_ball.acceleration = {0, 0};
     new_ball.id = ball_id;
     new_ball.ball_circle.radius = rnd(10, 50);           // Radius of the ball
-    new_ball.mass = new_ball.ball_circle.radius * 10.0f; // Calculate mass proportional to radius
+    new_ball.mass = new_ball.ball_circle.radius * log(new_ball.ball_circle.radius);  // Calculate mass proportional to radius
 
     new_ball.fill_color = random_rgb_color(128);
 
@@ -181,30 +181,15 @@ void update_balls(vector<ball> &balls)
 {
     for (ball &b : balls)
     {
-        // dynamic deceleration: low-velocity objects slow down slightly less
-        double deceleration_factor;
-        if (b.velocity.x > 0.10f || b.velocity.x > 0.10f )
-        {
-            deceleration_factor = -0.012f;
-        }
-        else if (b.velocity.x > 0.08f || b.velocity.x > 0.08f )
-        {
-            deceleration_factor = -0.010f;
-        }
-        else if (b.velocity.x > 0.05f || b.velocity.x > 0.05f )
-        {
-            deceleration_factor = -0.007f;
-        }
-        else
-        {
-            deceleration_factor = -0.003f;
-        }
+        double deceleration_factor = -0.01f;
 
         b.acceleration = vector_multiply(b.velocity, deceleration_factor);
         b.velocity = vector_add(b.velocity, b.acceleration);
 
         // Set velocity to 0 if the overall scale of the velocity gets very small
-        if (abs(b.velocity.x*b.velocity.x + b.velocity.y * b.velocity.y) < 0.000001f)
+        double vx = b.velocity.x;
+        double vy = b.velocity.y;
+        if ((vx * vx) + (vy * vy) < 0.025f)
         {
             b.velocity = vector_multiply(b.velocity, 0);
         }
