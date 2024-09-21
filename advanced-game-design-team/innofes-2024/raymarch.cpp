@@ -144,8 +144,6 @@ int main() {
 
     std::vector<rectangle> obstacles = generate_random_obstacles(NUM_OBSTACLES);
 
-    bool inactive = true;
-    unsigned int timer = 0;
     point_2d last_mouse_position = mouse_position();
     auto last_movement_time = std::chrono::steady_clock::now();
 
@@ -167,21 +165,12 @@ int main() {
 
         // Check if the mouse has moved in the last 10 seconds
         auto duration_since_last_movement = std::chrono::duration_cast<std::chrono::seconds>(current_time - last_movement_time).count();
-        if (duration_since_last_movement >= 3)
-            inactive = true;
-        else
-            inactive = false;
-
         point_2d origin;
-        if (inactive)
-        {
+
+        if (duration_since_last_movement >= 3)
             walk_origin_around(origin);
-        }
         else 
-        {
             origin = mouse_position();
-        }
-        timer++;
 
         std::vector<ray_hit> hits = cast_rays(obstacles, origin, NUM_RAYS, MAX_DISTANCE);
 

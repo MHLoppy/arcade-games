@@ -2,7 +2,17 @@
 #define RAYMARCH_TYPES_H
 
 #include "splashkit.h"
+#include <cmath>
 #include <vector>
+
+// grid-march wants floats for screen dimensions, and wants a square area
+const float SCREEN_WIDTH = 960;
+const float SCREEN_HEIGHT = 960;//540 for the half-height demo
+const int MARCH_RAYS = 360;
+const double MAX_DISTANCE = std::sqrt((SCREEN_WIDTH * SCREEN_WIDTH) + (SCREEN_HEIGHT * SCREEN_HEIGHT));
+const int NUM_OBSTACLES = 30;
+const color RAY_COLOR = {1, 1, 1, 1};
+//const color RAY_BG_COLOR = {1, 1, 1, 0.4};
 
 struct ray {
     point_2d origin;
