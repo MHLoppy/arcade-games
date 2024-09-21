@@ -11,6 +11,8 @@ struct ball
 
     float mass; // Mass of the ball, determined by the radius. Used in calculation of momentum
     int id;     // Unique ball identifier
+
+    color fill_color;
 };
 
 // Structure to represent the wall objects on the screen
@@ -173,6 +175,8 @@ ball add_ball(int ball_id, const vector<ball> &existing_balls, const vector<wall
     new_ball.ball_circle.radius = 15;                    // Set radius to a fixed value
     new_ball.mass = new_ball.ball_circle.radius * 10.0f; // Calculate mass proportional to radius
 
+    new_ball.fill_color = random_rgb_color(255);
+
     // Find a position for the new ball that doesn't overlap with any existing balls or walls
     while (!position_found)
     {
@@ -332,7 +336,7 @@ void draw_objects(const vector<ball> &balls, const vector<wall> &walls)
 {
     for (const ball &b : balls)
     {
-        fill_circle(COLOR_RED, b.ball_circle);
+        fill_circle(b.fill_color, b.ball_circle);
         draw_circle(COLOR_BLACK, b.ball_circle);
     }
 
@@ -360,7 +364,7 @@ void handle_inputs(vector<ball> &balls, vector<wall> &walls)
                     selected_wall = &w;
                     start_anchor_selected = true;
                     end_anchor_selected = false;
-                    selected_anchor_color = COLOR_BLUE; // Selected anchor turns blue
+                    selected_anchor_color = COLOR_BLACK; // Selected anchor turns blue
                     return;
                 }
                 // Check if the click is on the end anchor
@@ -369,7 +373,7 @@ void handle_inputs(vector<ball> &balls, vector<wall> &walls)
                     selected_wall = &w;
                     end_anchor_selected = true;
                     start_anchor_selected = false;
-                    selected_anchor_color = COLOR_BLUE; // Selected anchor turns blue
+                    selected_anchor_color = COLOR_BLACK; // Selected anchor turns blue
                     return;
                 }
             }
