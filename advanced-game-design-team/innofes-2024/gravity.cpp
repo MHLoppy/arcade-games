@@ -468,19 +468,34 @@ void update_balls(vector<ball> &balls)
             b.velocity.x *= -1;                                             // Reverse the x-velocity (bounce off the wall)
         }
 
-        if (abs(b.velocity.x) + abs(b.velocity.y) > 1.25)
+        // high movement in either direction
+        if ((fabs(b.velocity.x) > 1) || (fabs(b.velocity.y)) > 1)
         {
             if (b.fill_color.r < 0.99)
-                b.fill_color.r += 0.01f;
+                b.fill_color.r += 0.01;
             if (b.fill_color.b > 0.01)
-                b.fill_color.b -= 0.01f;
+                b.fill_color.b -= 0.01;
         }
-        else if (abs(b.velocity.x) + abs(b.velocity.y) < 0.25)
+        if ((fabs(b.velocity.x) + fabs(b.velocity.y)) > 2)
+        {
+            if (b.fill_color.r < 0.99)
+                b.fill_color.r += 0.01;
+            if (b.fill_color.b > 0.01)
+                b.fill_color.b -= 0.01;
+        }
+        else if ((fabs(b.velocity.x) + fabs(b.velocity.y)) < 1.25)
         {
             if (b.fill_color.b < 0.99)
-                b.fill_color.b += 0.01f;
+                b.fill_color.b += 0.01;
             if (b.fill_color.r > 0.01)
-                b.fill_color.r -= 0.01f;
+                b.fill_color.r -= 0.01;
+        }
+        if ((fabs(b.velocity.x) + fabs(b.velocity.y)) < 0.25)
+        {
+            if (b.fill_color.b < 0.98)
+                b.fill_color.b += 0.01;
+            if (b.fill_color.r > 0.02)
+                b.fill_color.r -= 0.01;
         }
     }
 }
