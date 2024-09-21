@@ -10,6 +10,7 @@ const int MAX_LIGHT_DISTANCE = 500;
 //const double SCREEN_HEIGHT = 1000;
 const double CELL_SIZE = SCREEN_WIDTH / RES;
 const int GRID_RAYS = 700;
+const float CELL_MIN_LUM = 0.10f;
 
 enum class CellType {
     Floor,

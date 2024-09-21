@@ -29,7 +29,7 @@ Cell get_cell(const Grid& grid, int x, int y) {
 void march_light(Grid& grid, point_2d light_source, int num_rays, double max_distance) {
     // Reset luminance
     for (auto& cell : grid.cells) {
-        cell.luminance = 0.0;
+        cell.luminance = CELL_MIN_LUM;
     }
 
     for (int i = 0; i < num_rays; ++i) {
