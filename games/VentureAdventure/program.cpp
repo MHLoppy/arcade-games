@@ -15,11 +15,12 @@ int main()
 {
     open_window("VentureAdventure", 672, SCREEN_HEIGHT);
     window_toggle_border("VentureAdventure");
+    window_toggle_fullscreen("VentureAdventure");
     load_resources();
 
     //TESTING and DEBUG TOOL. Use these to adjust starting level, to update total levels when adding new level, or adjust lives
     int totallevels = 4;
-    int startinglevel = 1;
+    int startinglevel = 4;
     int startinglives = 3;
 
 

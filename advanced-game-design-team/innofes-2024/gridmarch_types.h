@@ -4,8 +4,8 @@
 #include "splashkit.h"
 #include <vector>
 
-const int RES = 150; // Number of cells in each dimension
-const int MAX_LIGHT_DISTANCE = 500;
+const int RES = 300; // Number of cells in each dimension
+const int MAX_LIGHT_DISTANCE = 700;
 //const double SCREEN_WIDTH = 1000;
 //const double SCREEN_HEIGHT = 1000;
 const double CELL_SIZE = SCREEN_WIDTH / RES;

@@ -6,8 +6,8 @@
 #include <vector>
 
 // grid-march wants floats for screen dimensions, and wants a square area
-const float SCREEN_WIDTH = 960;
-const float SCREEN_HEIGHT = 960;//540 for the half-height demo
+const float SCREEN_WIDTH = 2560;
+const float SCREEN_HEIGHT = 1440;//540 for the half-height demo
 const int MARCH_RAYS = 360;
 const double MAX_DISTANCE = std::sqrt((SCREEN_WIDTH * SCREEN_WIDTH) + (SCREEN_HEIGHT * SCREEN_HEIGHT));
 const int NUM_OBSTACLES = 30;

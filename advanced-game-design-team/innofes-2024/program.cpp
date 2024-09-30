@@ -329,7 +329,10 @@ void setup_walls(Grid& grid) {
 }
 
 int main() {
-    open_window("Tech Demo: Ray Marching", SCREEN_WIDTH, SCREEN_HEIGHT);
+    const string NAME = "Tech Demo: Ray Marching";
+    open_window(NAME, SCREEN_WIDTH, SCREEN_HEIGHT);
+    window_toggle_border(NAME);
+    window_toggle_fullscreen(NAME);
 
     // basic raymarch demo
     std::vector<rectangle> obstacles = generate_random_obstacles(NUM_OBSTACLES);
